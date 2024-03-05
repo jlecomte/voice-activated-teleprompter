@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+$button-disabled-background-color: hsl(0, 0%, 4%);
+$button-disabled-opacity: 0.2;
+
+@import "bulma";
+
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Layout */
+
+.navbar {
+  flex-shrink: 0;
+  border-bottom: 1px solid $grey-darker;
+}
+
+.content-area {
+  height: 100%;
+}
+
+/* NavBar styles */
+
+.navbar .title {
+  font-size: 2em;
+}
+
+.button,
+.button:focus {
+  background-color: $black;
+  border-color: $grey-dark;
+  color: $grey-dark;
+}
+
+.button:hover {
+  border-color: $grey;
+  color: $grey;
+}
+
+.fa-play {
+  color: $green;
+}
+
+.fa-stop {
+  color: $red;
+}
+
+.fa-up-down,
+.fa-left-right {
+  color: $grey;
+}
+
+.editing .fa-pencil,
+.vertically-flipped .fa-up-down,
+.horizontally-flipped .fa-left-right {
+  color: $yellow;
+}
+
+.slider > span {
+  margin-right: 0.5em;
+  color: $grey-light;
+}
+
+.buttons .dropdown {
+  margin-right: 0.5rem;
+}
+
+input[type="range"] {
+  width: 80px;
+}
+
+.navbar-brand ul {
+  margin-top: 0.3em;
+}
+
+.navbar-brand li {
+  float: left;
+  padding: 0 0.5em;
+  border-right: 1px solid $grey;
+}
+
+.navbar-brand li.last {
+  border: none;
+}
+
+.navbar-brand li a {
+  color: $cyan;
+  text-decoration: underline;
+}
+
+/* Content styles */
+
+.content {
+  overflow: auto;
+  background-color: $black;
+  border: none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  color: $white;
+  padding: 0;
+  line-height: inherit;
+}
+
+.content:focus {
+  outline: none;
+}
+
+div.content {
+  cursor: default;
+}
+
+.final-transcript {
+  color: $grey-darker;
+}
+
+.interim-transcript {
+  color: $yellow;
+}

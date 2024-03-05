@@ -1,16 +1,11 @@
-# Voice Activated Prompter
+# Voice-Activated Teleprompter
 
-## Bootstrapping
+I do not charge anything to create and maintain these open-source projects. But if you would like to say "thanks" for this project, feel free to send any amount through Paypal using the button below. I appreciate your support!
 
-This project uses [Vite](https://vitejs.dev/), [Vitest](https://vitest.dev/), and [React Testing Library](https://github.com/testing-library/react-testing-library) to create a modern [React](https://react.dev/) app compatible with [Create React App](https://create-react-app.dev/). To generate the scaffolding, I used the following command, which is (at the time of this writing) one of the official ways of bootstrapping a React/Redux app:
+[![](donate.png)](https://www.paypal.com/donate/?hosted_button_id=49UXY8F6VVYFA)
 
-```sh
-npx degit reduxjs/redux-templates/packages/vite-template-redux voice-activated-prompter
-```
+This web-based single-page application (SPA) is a voice-activated teleprompter, i.e., it automatically scrolls the text you are reading as you are reading it. It is built using [Vite](https://vitejs.dev/), [React](https://react.dev/), [Redux](https://redux.js.org/), and [Bulma](https://bulma.io/). I routinely use it with my [Elgato Prompter](https://www.elgato.com/us/en/p/prompter) to create [my own YouTube videos](https://www.youtube.com/@darkskygeek). Such software already exists, but it is either rather expensive, or not robust enough. For example, the free online software created by Teleprompter Mirror [[link](https://telepromptermirror.com/telepromptersoftware.htm)] easily gets confused if you go off script or mispronounce too many words, and as a result, it will stop auto-scrolling. This is why I built this app.
 
-## Scripts
+**Note:** It is currently hard-coded to recognize American English speech (`en-US` locale) and was tested only in the Chrome web browser. It will likely not work in other web browsers!
 
-- `dev`/`start` - start dev server and open browser
-- `build` - build for production
-- `preview` - locally preview production build
-- `test` - launch test runner
+You can try it live [here](https://jlecomte.github.io/voice-activated-teleprompter/dist/).
