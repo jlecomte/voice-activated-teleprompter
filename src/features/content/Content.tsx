@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react"
 import { escape } from "html-escaper"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
-import { setContent } from "./contentSlice"
+import { setContent, setFinalTranscriptIndex, setInterimTranscriptIndex } from "./contentSlice"
 
 import {
   selectStatus,
@@ -85,6 +85,10 @@ export const Content = () => {
             return (
               <span
                 key={textElement.index}
+                onClick={() => {
+                  dispatch(setFinalTranscriptIndex(index - 1))
+                  dispatch(setInterimTranscriptIndex(index - 1))
+                }}
                 className={
                   finalTranscriptIndex > 0 &&
                   textElement.index <= finalTranscriptIndex + 1

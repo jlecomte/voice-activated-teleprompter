@@ -127,3 +127,7 @@ div.content {
 .interim-transcript {
   color: $yellow;
 }
+
+.content > span:hover {
+  color: $red !important;
+}

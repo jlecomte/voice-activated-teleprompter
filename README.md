@@ -9,3 +9,5 @@ This web-based single-page application (SPA) is a voice-activated teleprompter, 
 **Note:** It is currently hard-coded to recognize American English speech (`en-US` locale) and was tested only in the Chrome web browser. It will likely not work in other web browsers!
 
 You can try it live [here](https://jlecomte.github.io/voice-activated-teleprompter/dist/).
+
+**Instructions:** Once you've opened the live demo, click on the `Edit` button in the toolbar. Paste your script into the content area and click on the `Edit` button again to validate. Then, click on the `Play` button in the toolbar and start reading your script. If you need to take a break, you can click on the `Stop` button at any time, and then later resume the transcription by clicking on the `Play` button again. You can also click on individual words in your script to reset the transcription to a specific index in case you need to re-read a section of your script.
