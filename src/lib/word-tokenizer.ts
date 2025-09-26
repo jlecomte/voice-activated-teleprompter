@@ -25,7 +25,7 @@ export const tokenize = (text: string | null) => {
         hintLength > 0 ? text.substring(i, i + hintLength + 1) : s.substring(i)
       inToken = false
     } else {
-      inToken = /[A-Za-zА-Яа-я0-9_]/.test(s)
+      inToken = /[A-Za-zÀ-ÿА-Яа-я0-9_]/.test(s)
     }
 
     if (current === null) {
