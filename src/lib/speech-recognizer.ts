@@ -8,10 +8,10 @@ export default class SpeechRecognizer {
   private subscribers: SubscriberFunction[] = []
   private shouldListen: Boolean = false
 
-  constructor() {
+  constructor(language: string = "en-US") {
     this.recognizer = new webkitSpeechRecognition()
 
-    this.recognizer.lang = "en-US"
+    this.recognizer.lang = language
     this.recognizer.continuous = true
     this.recognizer.interimResults = true
 
@@ -54,5 +54,16 @@ export default class SpeechRecognizer {
 
   onresult(subscriber: SubscriberFunction): void {
     this.subscribers.push(subscriber)
+  }
+
+  setLanguage(language: string): void {
+    const wasListening = this.shouldListen
+    if (wasListening) {
+      this.stop()
+    }
+    this.recognizer.lang = language
+    if (wasListening) {
+      this.start()
+    }
   }
 }

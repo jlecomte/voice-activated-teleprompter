@@ -8,6 +8,16 @@ export interface NavBarSliceState {
   fontSize: number
   margin: number
   opacity: number
+  language: string
+}
+
+// Detect browser language and default to pt-BR if Portuguese, otherwise en-US
+const detectLanguage = (): string => {
+  const savedLanguage = localStorage.getItem("teleprompter-language")
+  if (savedLanguage) return savedLanguage
+
+  const browserLang = navigator.language || navigator.languages?.[0] || "en-US"
+  return browserLang.startsWith("pt") ? "pt-BR" : "en-US"
 }
 
 const initialState: NavBarSliceState = {
@@ -17,6 +27,7 @@ const initialState: NavBarSliceState = {
   fontSize: 30,
   margin: 10,
   opacity: 80,
+  language: detectLanguage(),
 }
 
 export const navbarSlice = createAppSlice({
@@ -62,6 +73,11 @@ export const navbarSlice = createAppSlice({
     setOpacity: create.reducer((state, action: PayloadAction<number>) => {
       state.opacity = action.payload
     }),
+
+    setLanguage: create.reducer((state, action: PayloadAction<string>) => {
+      state.language = action.payload
+      localStorage.setItem("teleprompter-language", action.payload)
+    }),
   }),
 
   selectors: {
@@ -71,6 +87,7 @@ export const navbarSlice = createAppSlice({
     selectHorizontallyFlipped: state => state.horizontallyFlipped,
     selectVerticallyFlipped: state => state.verticallyFlipped,
     selectOpacity: state => state.opacity,
+    selectLanguage: state => state.language,
   },
 })
 
@@ -84,6 +101,7 @@ export const {
   setFontSize,
   setMargin,
   setOpacity,
+  setLanguage,
 } = navbarSlice.actions
 
 export const {
@@ -93,4 +111,5 @@ export const {
   selectHorizontallyFlipped,
   selectVerticallyFlipped,
   selectOpacity,
+  selectLanguage,
 } = navbarSlice.selectors

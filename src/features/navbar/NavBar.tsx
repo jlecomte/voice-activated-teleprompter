@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 
-import { startTeleprompter, stopTeleprompter } from "../../app/thunks"
+import { startTeleprompter, stopTeleprompter, changeLanguage } from "../../app/thunks"
 
 import {
   toggleEdit,
@@ -9,12 +9,14 @@ import {
   setFontSize,
   setMargin,
   setOpacity,
+  setLanguage,
   selectStatus,
   selectHorizontallyFlipped,
   selectVerticallyFlipped,
   selectFontSize,
   selectMargin,
   selectOpacity,
+  selectLanguage,
 } from "./navbarSlice"
 
 import { resetTranscriptionIndices } from "../content/contentSlice"
@@ -28,6 +30,7 @@ export const NavBar = () => {
   const opacity = useAppSelector(selectOpacity)
   const horizontallyFlipped = useAppSelector(selectHorizontallyFlipped)
   const verticallyFlipped = useAppSelector(selectVerticallyFlipped)
+  const language = useAppSelector(selectLanguage)
 
   return (
     <nav
@@ -59,6 +62,26 @@ export const NavBar = () => {
       <div className="navbar-end">
         {status === "stopped" ? (
           <>
+            <div className="navbar-item">
+              <div className="field">
+                <div className="control">
+                  <div className="select is-small">
+                    <select
+                      value={language}
+                      onChange={e => {
+                        const newLanguage = e.currentTarget.value
+                        dispatch(setLanguage(newLanguage))
+                        dispatch(changeLanguage(newLanguage))
+                      }}
+                      title="Select Language"
+                    >
+                      <option value="en-US">🇺🇸 English</option>
+                      <option value="pt-BR">🇧🇷 Português</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="navbar-item slider">
               <span>Font size:</span>
               <input
