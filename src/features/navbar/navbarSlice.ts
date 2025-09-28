@@ -11,13 +11,29 @@ export interface NavBarSliceState {
   language: string
 }
 
+export const SUPPORTED_LOCALES = {
+  "en-US": "🇺🇸 English (USA)",
+  "fr-FR": "🇫🇷 French (France)",
+  "de-DE": "🇩🇪 German (Germany)",
+  "it-IT": "🇮🇹 Italian (Italy)",
+  "pt-BR": "🇧🇷 Portuguese (Brazil)",
+  "es-ES": "🇪🇸 Spanish (Spain)",
+}
+
 // Detect browser language and default to pt-BR if Portuguese, otherwise en-US
 const detectLanguage = (): string => {
   const savedLanguage = localStorage.getItem("teleprompter-language")
-  if (savedLanguage) return savedLanguage
+  if (savedLanguage) {
+    return savedLanguage
+  }
 
-  const browserLang = navigator.language || navigator.languages?.[0] || "en-US"
-  return browserLang.startsWith("pt") ? "pt-BR" : "en-US"
+  if (SUPPORTED_LOCALES.hasOwnProperty(navigator.language)) {
+    return navigator.language
+  }
+
+  // TODO: Try to find a "best match", for example if `navigator.language` is `fr-CA` or just `fr`...
+
+  return "en-US"
 }
 
 const initialState: NavBarSliceState = {

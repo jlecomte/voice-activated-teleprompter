@@ -17,6 +17,7 @@ import {
   selectMargin,
   selectOpacity,
   selectLanguage,
+  SUPPORTED_LOCALES,
 } from "./navbarSlice"
 
 import { resetTranscriptionIndices } from "../content/contentSlice"
@@ -74,9 +75,12 @@ export const NavBar = () => {
                         dispatch(changeLanguage(newLanguage))
                       }}
                       title="Select Language"
-                    >
-                      <option value="en-US">🇺🇸 English</option>
-                      <option value="pt-BR">🇧🇷 Português</option>
+                    >{
+                      Object.keys(SUPPORTED_LOCALES).map((locale) => {
+                        const label = SUPPORTED_LOCALES[locale as keyof typeof SUPPORTED_LOCALES]
+                        return <option value={locale}>{label}</option>
+                      })
+                    }
                     </select>
                   </div>
                 </div>
