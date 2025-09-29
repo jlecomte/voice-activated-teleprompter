@@ -8,6 +8,7 @@ export interface NavBarSliceState {
   fontSize: number
   margin: number
   opacity: number
+  scrollOffset: number
   language: string
 }
 
@@ -43,6 +44,7 @@ const initialState: NavBarSliceState = {
   fontSize: 30,
   margin: 10,
   opacity: 80,
+  scrollOffset: 100,
   language: detectLanguage(),
 }
 
@@ -90,6 +92,10 @@ export const navbarSlice = createAppSlice({
       state.opacity = action.payload
     }),
 
+    setScrollOffset: create.reducer((state, action: PayloadAction<number>) => {
+      state.scrollOffset = action.payload
+    }),
+
     setLanguage: create.reducer((state, action: PayloadAction<string>) => {
       state.language = action.payload
       localStorage.setItem("teleprompter-language", action.payload)
@@ -103,6 +109,7 @@ export const navbarSlice = createAppSlice({
     selectHorizontallyFlipped: state => state.horizontallyFlipped,
     selectVerticallyFlipped: state => state.verticallyFlipped,
     selectOpacity: state => state.opacity,
+    selectScrollOffset: state => state.scrollOffset,
     selectLanguage: state => state.language,
   },
 })
@@ -117,6 +124,7 @@ export const {
   setFontSize,
   setMargin,
   setOpacity,
+  setScrollOffset,
   setLanguage,
 } = navbarSlice.actions
 
@@ -127,5 +135,6 @@ export const {
   selectHorizontallyFlipped,
   selectVerticallyFlipped,
   selectOpacity,
+  selectScrollOffset,
   selectLanguage,
 } = navbarSlice.selectors

@@ -10,6 +10,7 @@ import {
   selectFontSize,
   selectMargin,
   selectOpacity,
+  selectScrollOffset,
 } from "../navbar/navbarSlice"
 
 import {
@@ -26,6 +27,7 @@ export const Content = () => {
   const fontSize = useAppSelector(selectFontSize)
   const margin = useAppSelector(selectMargin)
   const opacity = useAppSelector(selectOpacity)
+  const scrollOffset = useAppSelector(selectScrollOffset)
   const horizontallyFlipped = useAppSelector(selectHorizontallyFlipped)
   const verticallyFlipped = useAppSelector(selectVerticallyFlipped)
   const rawText = useAppSelector(selectRawText)
@@ -45,7 +47,7 @@ export const Content = () => {
     if (containerRef.current) {
       if (lastRef.current) {
         containerRef.current.scrollTo({
-          top: lastRef.current.offsetTop - 100,
+          top: lastRef.current.offsetTop - scrollOffset,
           behavior: "smooth",
         })
       } else {
