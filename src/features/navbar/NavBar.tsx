@@ -9,6 +9,7 @@ import {
   setFontSize,
   setMargin,
   setOpacity,
+  setScrollOffset,
   setLanguage,
   selectStatus,
   selectHorizontallyFlipped,
@@ -16,6 +17,7 @@ import {
   selectFontSize,
   selectMargin,
   selectOpacity,
+  selectScrollOffset,
   selectLanguage,
   SUPPORTED_LOCALES,
 } from "./navbarSlice"
@@ -29,6 +31,7 @@ export const NavBar = () => {
   const fontSize = useAppSelector(selectFontSize)
   const margin = useAppSelector(selectMargin)
   const opacity = useAppSelector(selectOpacity)
+  const scrollOffset = useAppSelector(selectScrollOffset)
   const horizontallyFlipped = useAppSelector(selectHorizontallyFlipped)
   const verticallyFlipped = useAppSelector(selectVerticallyFlipped)
   const language = useAppSelector(selectLanguage)
@@ -122,6 +125,19 @@ export const NavBar = () => {
                 value={opacity}
                 onChange={e =>
                   dispatch(setOpacity(parseInt(e.currentTarget.value, 10)))
+                }
+              />
+            </div>
+            <div className="navbar-item slider">
+              <span>Line position:</span>
+              <input
+                type="range"
+                step="10"
+                min="10"
+                max="200"
+                value={scrollOffset}
+                onChange={e =>
+                  dispatch(setScrollOffset(parseInt(e.currentTarget.value, 10)))
                 }
               />
             </div>
