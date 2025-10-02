@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useLayoutEffect, useRef } from "react"
 import { escape } from "html-escaper"
 import { useAppDispatch, useAppSelector } from "../../app/hooks"
 import { setContent, setFinalTranscriptIndex, setInterimTranscriptIndex } from "./contentSlice"
@@ -42,12 +42,13 @@ export const Content = () => {
 
   const containerRef = useRef<null | HTMLDivElement>(null)
   const lastRef = useRef<null | HTMLDivElement>(null)
+  const bottomSpacerRef = useRef<null | HTMLDivElement>(null)
 
   useEffect(() => {
     if (containerRef.current) {
       if (lastRef.current) {
         containerRef.current.scrollTo({
-          top: lastRef.current.offsetTop - scrollOffset,
+          top: Math.max(lastRef.current.offsetTop - scrollOffset, 0),
           behavior: "smooth",
         })
       } else {
@@ -58,6 +59,15 @@ export const Content = () => {
       }
     }
   })
+
+  useLayoutEffect(() => {
+    if (!containerRef.current || !bottomSpacerRef.current) {
+      return
+    }
+
+    const containerHeight = containerRef.current.clientHeight
+    bottomSpacerRef.current.style.height = `${scrollOffset + containerHeight}px`
+  }, [scrollOffset, textElements.length])
 
   return (
     <main className="content-area">
@@ -107,6 +117,11 @@ export const Content = () => {
               />
             )
           })}
+          <div
+            aria-hidden="true"
+            ref={bottomSpacerRef}
+            style={{ height: 0, flexShrink: 0 }}
+          />
         </div>
       )}
     </main>
