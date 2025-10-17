@@ -1,92 +1,77 @@
-# Instruções para Criar o Pull Request
+# Pull Request Checklist
 
-## ✅ Status: Pronto para submeter PR
+## ✅ Status: Ready for submission
 
-Todas as alterações foram implementadas e commitadas no branch `feature/multi-language-support`.
+All speech-recognition hardening changes are committed on the `feature/line-offset-adjustments` branch.
 
-## 📋 Passos para submeter o PR:
+## 📋 Steps to open the PR
 
-### 1. Fork do Repositório Original
+### 1. Fork the upstream repository (if not already)
 ```bash
-# Vá para: https://github.com/jlecomte/voice-activated-teleprompter
-# Clique em "Fork" no canto superior direito
+# Go to: https://github.com/jlecomte/voice-activated-teleprompter
+# Click "Fork" in the top-right corner
 ```
 
-### 2. Adicionar seu Fork como Remote
+### 2. Make sure your fork remote exists
 ```bash
-# Substitua 'seu-username' pelo seu username do GitHub
-git remote add fork git@github.com:seu-username/voice-activated-teleprompter.git
+# Replace 'your-username' with your GitHub username
+git remote add fork git@github.com:your-username/voice-activated-teleprompter.git
 
-# Verificar remotes
+# Confirm the remotes
 git remote -v
 ```
 
-### 3. Push do Branch para seu Fork
+### 3. Push this branch to your fork
 ```bash
-git push fork feature/multi-language-support
+git push fork feature/line-offset-adjustments
 ```
 
-### 4. Criar Pull Request
-1. Vá para seu fork no GitHub
-2. Clique em "Compare & pull request"
-3. **Base repository:** `jlecomte/voice-activated-teleprompter` branch `master`
-4. **Head repository:** `seu-username/voice-activated-teleprompter` branch `feature/multi-language-support`
+### 4. Create the Pull Request
+1. Open your fork on GitHub.
+2. Click **Compare & pull request**.
+3. **Base repository:** `jlecomte/voice-activated-teleprompter` (`master`).
+4. **Head repository:** `your-username/voice-activated-teleprompter` (`feature/line-offset-adjustments`).
 
-### 5. Preencher Informações do PR
-- **Título:** `Add Multi-Language Support (English + Portuguese)`
-- **Descrição:** Use o conteúdo de `PR_DESCRIPTION.md`
+### 5. Fill out the PR form
+- **Suggested title:** `Harden speech recognition restart loop`
+- **Suggested description:**
+  - Summarize the fallback to `SpeechRecognition`/`webkitSpeechRecognition` and the restart guard.
+  - Add verification steps (`npm run type-check` and manual teleprompter test with the long script).
+  - Note the new logging and behavior when the API is unavailable or permission is denied.
 
-## 🔥 Resumo das Mudanças Implementadas
+## 🔥 Summary of changes
 
-### ✅ Funcionalidades Adicionadas:
-- [x] Detecção automática de idioma do navegador
-- [x] Seletor de idioma na interface (🇺🇸/🇧🇷)
-- [x] Suporte a mudança de idioma em tempo real
-- [x] Persistência da preferência no localStorage
-- [x] Tokenização melhorada com acentos (À-ÿ)
-- [x] Documentação atualizada
+### ✅ Enhancements
+- [x] Fallback to the standard or prefixed Web Speech API constructor
+- [x] Timed restart when the recognition session ends unexpectedly
+- [x] Logging and handling for permission errors
+- [x] Safe bail-out when the API is missing
 
-### 📁 Arquivos Modificados:
-- `src/lib/speech-recognizer.ts` - Parâmetro de idioma + método setLanguage()
-- `src/features/navbar/navbarSlice.ts` - Estado Redux + detecção automática
-- `src/features/navbar/NavBar.tsx` - Dropdown de seleção
-- `src/app/thunks.ts` - Integração com speech recognizer
-- `src/lib/word-tokenizer.ts` - Regex com acentos
-- `README.md` + `CLAUDE.md` - Documentação atualizada
+### 📁 Files touched
+- `src/lib/speech-recognizer.ts` – constructor resolution, restart timer, logging
+- `src/app/thunks.ts` – graceful failure when initialization throws
+- `PR_INSTRUCTIONS.md` – this document
 
-### 🧪 Testes Realizados:
-- ✅ Compilação TypeScript
-- ✅ ESLint (apenas 1 warning não crítico)
-- ✅ Servidor dev funcional
-- ✅ Funcionalidade preservada
+### 🧪 Tests performed
+- ✅ `npm run type-check`
+- ✅ Manual browser test reading a long passage
 
-## 💡 Argumentos para o PR
+## 💡 Why this PR should be merged
 
-**Por que aceitar este PR:**
+1. **Reliability boost** – reduces voice scrolling stalls over long sessions.
+2. **Backward compatible** – works in browsers with either speech API variant.
+3. **Better diagnostics** – console logs explain restart attempts and failures.
+4. **Low risk** – no UI changes and no new dependencies.
+5. **Easy rollback** – scope is limited to the speech-recognition wrapper.
 
-1. **Amplia base de usuários** - Adiciona suporte a ~260M falantes de português
-2. **Mantém compatibilidade** - Não quebra funcionalidade existente
-3. **UX inteligente** - Detecção automática + seleção manual
-4. **Código limpo** - Implementação bem estruturada com Redux
-5. **Escalável** - Arquitetura permite adicionar mais idiomas facilmente
-6. **Bem testado** - Validações técnicas concluídas
-
-## 📧 Próximos Passos
-
-Após criar o PR:
-1. Monitorar feedback do mantenedor
-2. Responder a comentários/sugestões
-3. Fazer ajustes se necessário
-4. Aguardar aprovação e merge
+## 📧 After opening the PR
+1. Monitor maintainer feedback.
+2. Respond quickly to review comments.
+3. Push follow-up commits if requested.
+4. Await approval and merge.
 
 ---
 
-**Arquivos importantes para referência:**
-- `PR_DESCRIPTION.md` - Descrição completa para colar no GitHub
-- Este arquivo - Instruções passo a passo
-
-**Comando para ver o diff completo:**
-```bash
-git log --oneline -1
-git show HEAD
-```
+**Useful references**
+- This file – the submission checklist.
+- `git show HEAD` – copy the latest diff summary into the PR if desired.
