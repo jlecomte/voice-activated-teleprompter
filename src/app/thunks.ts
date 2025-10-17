@@ -13,7 +13,14 @@ export const startTeleprompter = (): AppThunk => (dispatch, getState) => {
   dispatch(start())
 
   const { language } = getState().navbar
-  speechRecognizer = new SpeechRecognizer(language)
+  try {
+    speechRecognizer = new SpeechRecognizer(language)
+  } catch (error) {
+    console.error("Speech recognition initialization failed", error)
+    speechRecognizer = null
+    dispatch(stop())
+    return
+  }
 
   speechRecognizer.onresult(
     (final_transcript: string, interim_transcript: string) => {
