@@ -49,16 +49,16 @@ export const Content = () => {
       if (lastRef.current) {
         containerRef.current.scrollTo({
           top: Math.max(lastRef.current.offsetTop - scrollOffset, 0),
-          behavior: "smooth",
+          behavior: "auto",
         })
       } else {
         containerRef.current.scrollTo({
           top: 0,
-          behavior: "smooth",
+          behavior: "auto",
         })
       }
     }
-  })
+  }, [interimTranscriptIndex, finalTranscriptIndex, scrollOffset])
 
   useLayoutEffect(() => {
     if (!containerRef.current || !bottomSpacerRef.current) {
