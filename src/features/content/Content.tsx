@@ -73,6 +73,8 @@ export const Content = () => {
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
+      if (status === "editing") return;
+
       const maxIndex = textElements.length - 1;
 
       if (event.code === "Escape") {
