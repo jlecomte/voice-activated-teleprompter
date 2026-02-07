@@ -11,3 +11,14 @@ This web-based single-page application (SPA) is a voice-activated teleprompter, 
 You can try it live [here](https://jlecomte.github.io/voice-activated-teleprompter/dist/).
 
 **Instructions:** Once you've opened the live demo, click on the `Edit` button in the toolbar. Paste your script into the content area and click on the `Edit` button again to validate. Then, click on the `Play` button in the toolbar and start reading your script. If you need to take a break, you can click on the `Stop` button at any time, and then later resume the transcription by clicking on the `Play` button again. You can also click on individual words in your script to reset the transcription to a specific index in case you need to re-read a section of your script.
+
+**Keyboard Shortcuts:** While the teleprompter is running (not in edit mode), the following keyboard shortcuts are available:
+
+| Key | Action |
+|-----|--------|
+| `Space` | Start/stop the teleprompter |
+| `Escape` | Stop the teleprompter |
+| `Arrow Up` | Jump back 15 words |
+| `Arrow Down` | Jump forward 15 words |
+| `Arrow Left` | Jump back 5 words |
+| `Arrow Right` | Jump forward 5 words |

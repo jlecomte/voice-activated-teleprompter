@@ -20,6 +20,8 @@ import {
   selectInterimTranscriptIndex,
 } from "./contentSlice"
 
+import { startTeleprompter, stopTeleprompter } from "../../app/thunks"
+
 export const Content = () => {
   const dispatch = useAppDispatch()
 
@@ -68,6 +70,47 @@ export const Content = () => {
     const containerHeight = containerRef.current.clientHeight
     bottomSpacerRef.current.style.height = `${scrollOffset + containerHeight}px`
   }, [scrollOffset, textElements.length])
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (status === "editing") return;
+
+      const maxIndex = textElements.length - 1;
+
+      if (event.code === "Escape") {
+        event.preventDefault();
+        dispatch(stopTeleprompter());
+      } else if (event.code === "Space") {
+        event.preventDefault();
+        if (status === "stopped") {
+          dispatch(startTeleprompter());
+        } else if (status === "started") {
+          dispatch(stopTeleprompter());
+        }
+      } else if (event.code === "ArrowUp") {
+        event.preventDefault();
+        dispatch(setFinalTranscriptIndex(Math.max(-1, finalTranscriptIndex - 15)));
+        dispatch(setInterimTranscriptIndex(Math.max(-1, interimTranscriptIndex - 15)));
+      } else if (event.code === "ArrowLeft") {
+        event.preventDefault();
+        dispatch(setFinalTranscriptIndex(Math.max(-1, finalTranscriptIndex - 5)));
+        dispatch(setInterimTranscriptIndex(Math.max(-1, interimTranscriptIndex - 5)));
+      } else if (event.code === "ArrowDown") {
+        event.preventDefault();
+        dispatch(setFinalTranscriptIndex(Math.min(maxIndex, finalTranscriptIndex + 15)));
+        dispatch(setInterimTranscriptIndex(Math.min(maxIndex, interimTranscriptIndex + 15)));
+      } else if (event.code === "ArrowRight") {
+        event.preventDefault();
+        dispatch(setFinalTranscriptIndex(Math.min(maxIndex, finalTranscriptIndex + 5)));
+        dispatch(setInterimTranscriptIndex(Math.min(maxIndex, interimTranscriptIndex + 5)));
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  })
 
   return (
     <main className="content-area">
