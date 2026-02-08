@@ -13,12 +13,12 @@ export interface NavBarSliceState {
 }
 
 export const SUPPORTED_LOCALES = {
+  "nl-NL": "🇳🇱 Dutch (Netherlands)",
   "en-US": "🇺🇸 English (USA)",
   "fr-FR": "🇫🇷 French (France)",
   "de-DE": "🇩🇪 German (Germany)",
   "it-IT": "🇮🇹 Italian (Italy)",
   "pt-BR": "🇧🇷 Portuguese (Brazil)",
-  "nl-NL": "🇳🇱 Dutch (Netherlands)",
   "es-ES": "🇪🇸 Spanish (Spain)",
 }
 
