@@ -19,6 +19,7 @@ export const SUPPORTED_LOCALES = {
   "de-DE": "🇩🇪 German (Germany)",
   "it-IT": "🇮🇹 Italian (Italy)",
   "pt-BR": "🇧🇷 Portuguese (Brazil)",
+  "ru-RU": "🇷🇺 Russian (Russia)",
   "es-ES": "🇪🇸 Spanish (Spain)",
 }
 
